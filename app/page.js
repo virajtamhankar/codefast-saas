@@ -1,6 +1,10 @@
 import Buttonlogin from "@/Components/Buttonlogin";
+import ListItem from "@/Components/ListItem";
+import FaqListItem from "@/Components/FaqListItems";
+
 const isLoggedIn = true;
 const name = "Viraj";
+const pricingItemsList = ["Collect feedback", "Add users"];
 
 export default function Home() {
   return (
@@ -10,14 +14,19 @@ export default function Home() {
         <section className="flex justify-between items-center px-8 py-4 max-w-3xl mx-auto">
           <div className="font-bold">CodeFastSaas</div>
           <div className="space-x-4 max-md:hidden">
-            <a className="link link-hover">Pricing</a>
-            <a className="link link-hover">FAQ</a>
+            <a className="link link-hover" href="#pricing">
+              Pricing
+            </a>
+            <a className="link link-hover" href="#faq">
+              FAQ
+            </a>
           </div>
           <div className="bg-yellow-500">
-            <Buttonlogin />
+            <Buttonlogin isLoggedIn={isLoggedIn} name={name} />
           </div>
         </section>
       </section>
+
       {/* body section */}
       <section className="text-center py-24 px-16 max-w-3xl mx-auto">
         <h1 className="text-5xl p-2">
@@ -26,10 +35,12 @@ export default function Home() {
         <div className="p-5 font-bold">
           Understand what your customers really want from your product.
         </div>
-        <Buttonlogin isLoggedIn={isLoggedIn} name={name} />
+        <Buttonlogin isLoggedIn={isLoggedIn} name={name} extraStyle="w-full" />
       </section>
+
       {/* pricing */}
-      <section className="bg-base-200 space-y-2">
+      <section className="bg-base-200 space-y-2" id="pricing">
+        {/* Marc's pricing card */}
         <section className=" py-24 px-16 max-w-3xl mx-auto">
           <p className="text-sm uppercase font-extrabold text-center text-primary mb-3 w-c">
             pricing
@@ -44,39 +55,51 @@ export default function Home() {
               <p className="text-sm opacity-50 uppercase">/month</p>
             </div>
             <ul className="space-y-2">
-              <li className="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  className="size-4 text-green-500"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Collect feedback
-              </li>
-              <li className="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  className="size-4 text-green-500"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Add users
-              </li>
+              <ListItem text="Collect feedback" />
+              <ListItem text="Add users" />
+              {pricingItemsList.map((priceItem) => {
+                return <ListItem text={priceItem} key={priceItem} />;
+              })}
             </ul>
           </div>
         </section>
+        {/* DaisyUI card */}
+        <div className="card bg-base-400 w-96 shadow-sm mx-auto max-w-3xl py-1">
+          <figure>
+            <img src="https://images.app.goo.gl/vcjkCcgMmndiZgcJ7" />
+          </figure>
+          <div className="card-body">
+            <h2 className="card-title">Hogwarts prep school</h2>
+            <p>We bribe Dumbledore to get you a Hogwarts admission letter</p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">Abracadabra!</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ section */}
+      <section className=" py-24 px-16 max-w-3xl mx-auto" id="faq">
+        <p className="text-sm uppercase font-extrabold text-center text-primary mb-3 w-c">
+          FAQ
+        </p>
+        <h2 className="text-3xl lg:text-4xl font-extrabold mb-12 text-center">
+          Frequenctly asked questions
+        </h2>
+        <ul className="max-w-lg mx-auto">
+          {[
+            {
+              question: "Who did Hermionie have an affair with?",
+              answer: "Viraj",
+            },
+            {
+              question: "Who did Hermionie regret not having met earlier?",
+              answer: "Ofc Viraj",
+            },
+          ].map((qa) => (
+            <FaqListItem key={qa.question} qa={qa} />
+          ))}
+        </ul>
       </section>
     </main>
   );

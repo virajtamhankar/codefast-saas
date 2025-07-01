@@ -1,6 +1,8 @@
 import Buttonlogin from "@/Components/Buttonlogin";
 import ListItem from "@/Components/ListItem";
 import FaqListItem from "@/Components/FaqListItems";
+import Image from "next/image";
+import productDemo from "@/app/productDemo.jpeg";
 
 const isLoggedIn = true;
 const name = "Viraj";
@@ -11,7 +13,7 @@ export default function Home() {
     <main>
       {/* header section */}
       <section className="bg-slate-200">
-        <section className="flex justify-between items-center px-8 py-4 max-w-3xl mx-auto">
+        <section className="flex justify-between items-center px-8 py-4 max-w-5xl mx-auto">
           <div className="font-bold">CodeFastSaas</div>
           <div className="space-x-4 max-md:hidden">
             <a className="link link-hover" href="#pricing">
@@ -28,14 +30,26 @@ export default function Home() {
       </section>
 
       {/* body section */}
-      <section className="text-center py-24 px-16 max-w-3xl mx-auto">
-        <h1 className="text-5xl p-2">
-          Collect customer feedback and gather insights to improve your business
-        </h1>
-        <div className="p-5 font-bold">
-          Understand what your customers really want from your product.
+      <section className="text-center lg:text-left py-24 px-16 max-w-5xl mx-auto flex flex-col lg:flex-row gap-14 items-center lg:items-start">
+        <Image
+          src={productDemo}
+          alt="Product Demo Image"
+          className="w-96 rounded-xl"
+        />
+        <div>
+          <h1 className="text-4xl p-2">
+            Collect customer feedback and gather insights to improve your
+            business
+          </h1>
+          <div className="p-2 font-bold">
+            Understand what your customers really want from your product.
+          </div>
+          <Buttonlogin
+            isLoggedIn={isLoggedIn}
+            name={name}
+            extraStyle="w-full"
+          />
         </div>
-        <Buttonlogin isLoggedIn={isLoggedIn} name={name} extraStyle="w-full" />
       </section>
 
       {/* pricing */}
@@ -66,7 +80,11 @@ export default function Home() {
         {/* DaisyUI card */}
         <div className="card bg-base-400 w-96 shadow-sm mx-auto max-w-3xl py-1">
           <figure>
-            <img src="https://images.app.goo.gl/vcjkCcgMmndiZgcJ7" />
+            <img
+              width={200}
+              height={200}
+              src="https://static.wikia.nocookie.net/harrypotter/images/e/e1/Hogwarts_Castle_DHF2.jpg/revision/latest?cb=20120128145344"
+            />
           </figure>
           <div className="card-body">
             <h2 className="card-title">Hogwarts prep school</h2>

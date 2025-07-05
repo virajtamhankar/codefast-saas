@@ -83,6 +83,7 @@ export default function Home() {
             <img
               width={200}
               height={200}
+              alt="Random image"
               src="https://static.wikia.nocookie.net/harrypotter/images/e/e1/Hogwarts_Castle_DHF2.jpg/revision/latest?cb=20120128145344"
             />
           </figure>

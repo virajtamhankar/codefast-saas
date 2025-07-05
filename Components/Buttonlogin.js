@@ -1,14 +1,13 @@
 import Link from "next/link";
-import { Children } from "react";
 
-const Buttonlogin = ({ isLoggedIn, name, extraStyle, children }) => {
+const Buttonlogin = ({ isLoggedIn, name, extraStyle }) => {
   if (isLoggedIn) {
     return (
       <Link
         href="/user_dashboard"
         className={`btn btn-primary ${extraStyle ? extraStyle : ""}`}
       >
-        Welcome {(isLoggedIn = true ? name : "there")}
+        Welcome {isLoggedIn ? name : "there"}
       </Link>
     );
   }

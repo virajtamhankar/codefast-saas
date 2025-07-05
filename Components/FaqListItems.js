@@ -72,9 +72,10 @@ const FaqListItem = ({ qa }) => {
           )} */}
         </button>
       </li>
-      <div className={`${clicked ? "block" : "hidden"} py-1 mb-8 opacity-90`}>
+      {/* <div className={`${clicked ? "block" : "hidden"} py-1 mb-8 opacity-90`}>
         {qa.answer}
-      </div>
+      </div> */}
+      {clicked && <div className="block py-1 mb-8 opacity-90">{qa.answer}</div>}
     </>
   );
 };

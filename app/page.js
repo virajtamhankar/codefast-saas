@@ -1,14 +1,14 @@
-import Buttonlogin from "@/Components/Buttonlogin";
-import ListItem from "@/Components/ListItem";
-import FaqListItem from "@/Components/FaqListItems";
+import Buttonlogin from "@/components/Buttonlogin";
+import ListItem from "@/components/ListItem";
+import FaqListItem from "@/components/FaqListItems";
 import Image from "next/image";
 import productDemo from "@/app/productDemo.jpeg";
+import { auth } from "@/auth";
 
-const isLoggedIn = true;
-const name = "Viraj";
 const pricingItemsList = ["Collect feedback", "Add users"];
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
   return (
     <main>
       {/* header section */}
@@ -24,11 +24,10 @@ export default function Home() {
             </a>
           </div>
           <div className="bg-yellow-500">
-            <Buttonlogin isLoggedIn={isLoggedIn} name={name} />
+            <Buttonlogin session={session} />
           </div>
         </section>
       </section>
-
       {/* body section */}
       <section className="text-center lg:text-left py-24 px-16 max-w-5xl mx-auto flex flex-col lg:flex-row gap-14 items-center lg:items-start">
         <Image
@@ -44,14 +43,9 @@ export default function Home() {
           <div className="p-2 font-bold">
             Understand what your customers really want from your product.
           </div>
-          <Buttonlogin
-            isLoggedIn={isLoggedIn}
-            name={name}
-            extraStyle="w-full"
-          />
+          <Buttonlogin session={session} extraStyle="w-full" />
         </div>
       </section>
-
       {/* pricing */}
       <section className="bg-base-200 space-y-2" id="pricing">
         {/* Marc's pricing card */}
@@ -96,7 +90,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* FAQ section */}
       <section className=" py-24 px-16 max-w-3xl mx-auto" id="faq">
         <p className="text-sm uppercase font-extrabold text-center text-primary mb-3 w-c">

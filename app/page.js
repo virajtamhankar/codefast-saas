@@ -1,6 +1,6 @@
-import Buttonlogin from "@/components/Buttonlogin";
-import ListItem from "@/components/ListItem";
-import FaqListItem from "@/components/FaqListItems";
+import Buttonlogin from "@/components-new/Buttonlogin";
+import ListItem from "@/components-new/ListItem";
+import FaqListItem from "@/components-new/FaqListItems";
 import Image from "next/image";
 import productDemo from "@/app/productDemo.jpeg";
 import { auth } from "@/auth";

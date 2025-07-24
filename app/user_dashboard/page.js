@@ -1,6 +1,6 @@
 "use client";
-import ButtonLogout from "@/components/ButtonLogout";
-import { Example } from "@/components/UseStateExample";
+import ButtonLogout from "@/components-new/ButtonLogout";
+import { Example } from "@/components-new/UseStateExample";
 
 export default function user_dashboard() {
   return (

@@ -25,6 +25,13 @@ export async function POST(req) {
     await connectMongo();
     const user = await User.findById(session.user.id);
 
+    if (!user.hasAccess) {
+      return NextResponse.json(
+        { error: "Please subscribe first!" },
+        { status: 403 }
+      );
+    }
+
     const board = await Board.create({
       userId: user._id,
       name: body.name,
@@ -33,7 +40,6 @@ export async function POST(req) {
     await User.findByIdAndUpdate(session.user.id, {
       $push: { boards: board._id },
     });
-    console.log(user.boards);
 
     return NextResponse.json(board);
   } catch (e) {
@@ -61,12 +67,21 @@ export async function DELETE(req) {
       );
     }
     await connectMongo();
+
+    const user = await User.findById(session?.user?.id);
+
+    if (!user.hasAccess) {
+      return NextResponse.json(
+        { error: "Please subscribe first!" },
+        { status: 403 }
+      );
+    }
+
     await Board.deleteOne({
       _id: boardId,
       userId: session?.user?.id,
     });
 
-    const user = await User.findById(session?.user?.id);
     user.boards = user.boards.filter((id) => id.toString() !== boardId);
     await user.save();
     return NextResponse.json({});

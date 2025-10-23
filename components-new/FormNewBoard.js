@@ -15,7 +15,7 @@ const FormNewBoard = () => {
     setIsLoading(true);
     try {
       const data = await axios.post("/api/board", { name });
-      console.log(data);
+
       setName("");
       toast.success("Board created!");
       router.refresh();

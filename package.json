@@ -12,6 +12,7 @@
     "@auth/mongodb-adapter": "^3.10.0",
     "@lemonsqueezy/lemonsqueezy.js": "^4.0.0",
     "axios": "^1.11.0",
+    "bad-words": "^4.0.0",
     "lucide-react": "^0.525.0",
     "mongodb": "^6.17.0",
     "mongoose": "^8.17.0",

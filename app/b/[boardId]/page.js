@@ -2,44 +2,37 @@ import connectMongo from "@/libs/mongoose";
 import Board from "@/models/Board";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import FormAddPost from "@/components-new/FormAddPost";
+import Post from "@/models/Post";
+import CardPost from "@/components-new/CardPost";
 
-const getBoard = async (boardId) => {
+const getData = async (boardId) => {
   await connectMongo();
 
   const board = await Board.findById(boardId);
+  const posts = await Post.find({ boardId }).sort({ createdAt: -1 });
+
   if (!board) redirect("/");
-  return board;
+
+  return { board, posts };
 };
 
 export default async function PublicFeedbackBoard({ params }) {
   const { boardId } = params;
-  const board = await getBoard(boardId);
+  const { board, posts } = await getData(boardId);
+
   return (
     <main className="bg-base-200 min-h-screen">
-      {" "}
-      <section className="bg-base-100">
-        {" "}
-        <div className="max-w-5xl mx-auto px-5 py-3">
-          <Link href="/user_dashboard" className="btn">
-            {/* Back icon */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-              />
-            </svg>
-            Back
-          </Link>
-          <h1 className="font-extrabold text-xl mb-4">{board.name}</h1>
-        </div>
+      <section className="max-w-5xl mx-auto p-5">
+        <h1 className="text-lg font-bold"> {board.name} (public)</h1>
+      </section>
+      <section className="max-w-5xl mx-auto px-5 flex flex-col md:flex-row items-start gap-8 pb-12">
+        <FormAddPost boardId={boardId} />
+        <ul className="space-y-4 flex-grow">
+          {posts.map((post) => {
+            return <CardPost key={post._id} post={post} />;
+          })}
+        </ul>
       </section>
     </main>
   );
